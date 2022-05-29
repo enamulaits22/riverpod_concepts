@@ -4,12 +4,12 @@ import 'package:test_app/data/repository/news_repository.dart';
 import 'news_state.dart';
 
 class NewsNotifier extends StateNotifier<NewsState> {
-  NewsNotifier(): super(NewsState(news: []));
+  NewsNotifier(): super(NewsLoadingState());
   
   void getNews() async {
-    state = NewsState(news: [], isLoading: true);
+    state = NewsLoadingState();
     final data = await NewsRepository().getNewsResponse();
-    state = NewsState(news: data.entries!, isLoading: false);
+    state = NewsLoadedState(news: data.entries!);
   }
 }
 

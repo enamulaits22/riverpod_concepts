@@ -15,9 +15,9 @@ class Home extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(onPressed: (){
         ref.read(newsDataProvider.notifier).getNews();
       }),
-      body: state.isLoading
+      body: state is NewsLoadingState
         ? const Center(child: CircularProgressIndicator())
-        : Center(
+        : state is NewsLoadedState ? Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -38,7 +38,7 @@ class Home extends ConsumerWidget {
                 ),
               ],
             ),
-          ),
+          ) : Container(),
     );
   }
 }
